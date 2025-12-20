@@ -38,7 +38,7 @@ We utilize a **Related-Key Differential Attack**. The paper posits that differen
 
 
 
-###3. The Model
+3. The Model
 The discriminator is a **Residual Network (ResNet)** enhanced with **Squeeze-and-Excitation (SE)** attention blocks.
 
 * **Input:** 64-bit binary vector (concatenated ciphertext pair).
@@ -49,7 +49,7 @@ The discriminator is a **Residual Network (ResNet)** enhanced with **Squeeze-and
 
 
 ## Installation & Usage
-###Prerequisites
+Prerequisites
 * Python 3.8+
 * PyTorch
 * Numpy
