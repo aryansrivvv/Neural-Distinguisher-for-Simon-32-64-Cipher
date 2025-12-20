@@ -59,7 +59,7 @@ pip install torch numpy
 
 ```
 
-###Running the TrainingTo train the distinguisher, run the `train.py` script. You can modify the `ROUNDS` variable inside the script to test different security margins.
+Running the TrainingTo train the distinguisher, run the `train.py` script. You can modify the `ROUNDS` variable inside the script to test different security margins.
 
 ```bash
 python train.py
