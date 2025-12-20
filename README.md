@@ -7,32 +7,33 @@ Cryptanalysis is the study of analyzing information systems to study the hidden 
 
 The goal is to train a neural network to distinguish between:
 
-1. **Related-Key Pairs:** Ciphertexts encrypted with keys and plaintexts satisfying a specific differential characteristic (\delta_{in} = \delta_{key}).
+1. **Related-Key Pairs:** Ciphertexts encrypted with keys and plaintexts satisfying a specific differential characteristic ( delta_in = delta_key).
 2. **Random Pairs:** Ciphertexts generated from random data.
 
 If the network achieves accuracy significantly > 50%, the cipher is considered "distinguished" for that number of rounds.
 
-## Repository Structure* `simon.py`: A pure Python/Numpy implementation of the **Simon 32/64** cipher, optimized for batch encryption.
+## Repository Structure
+* `simon.py`: A pure Python/Numpy implementation of the **Simon 32/64** cipher, optimized for batch encryption.
 * `data_generator.py`: Generates positive and negative training samples. Includes both **Single-Differential** and **Multi-Differential** generation logic.
 * `model.py`: The Neural Network architecture (ResNet + Squeeze-and-Excitation blocks) implemented in PyTorch.
 * `train.py`: The training loop, validation logic, and Cyclic Learning Rate scheduler.
 * `README.md`: Project documentation.
 
-## Methodology###
+## Methodology
 1. The Cipher**Simon 32/64** is a Feistel-based lightweight cipher proposed by the NSA .
 
 * **Block Size:** 32 bits
 * **Key Size:** 64 bits
 * **Operations:** Bitwise XOR, AND, Circular Shifts.
 
-###2. The Attack
+2. The Attack
 We utilize a **Related-Key Differential Attack**. The paper posits that differentials where the Input Difference (\Delta P) equals the Key Difference (\Delta K) are particularly effective for neural distinguishers.
 
-* 
+
 **Primary Differential:** `0x0000 0x0040` (Used for Single-Diff experiments).
 
 
-* 
+
 **Secondary Differential:** `0x0000 0x8010` (Added for Multi-Diff experiments).
 
 
@@ -42,7 +43,7 @@ The discriminator is a **Residual Network (ResNet)** enhanced with **Squeeze-and
 
 * **Input:** 64-bit binary vector (concatenated ciphertext pair).
 * **Hidden Layers:** 1D Convolutional layers with Residual connections.
-* 
+  
 **Attention:** SE blocks re-calibrate channel feature responses to focus on bit-level patterns .
 
 
@@ -74,7 +75,7 @@ python train.py
 | **7 Rounds** | Multi-Differential | **55.34%** |  Signal Dilution |
 | **8 Rounds** | Single-Differential | **50.21%** |  Secure (Limit Reached) |
 
-###Key Findings
+Key Findings
 1. **Breaking 7 Rounds:** The Basic Neural Distinguisher successfully identified non-random patterns in the ciphertext up to 7 rounds with >60% accuracy.
 2. **Signal Dilution:** At 7 rounds, the **Multi-Differential** approach yielded lower accuracy (55%) compared to the **Single-Differential** approach (60%). This suggests that mixing a strong differential (`0x40`) with a weaker one (`0x8010`) at this specific round count diluted the training signal, rather than enhancing it.
 
