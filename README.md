@@ -2,7 +2,8 @@
 
 The project is based on the research paper **"A Multi-Differential Approach to Enhance Related-Key Neural Distinguishers"** by Yuan and Wang, exploring how Deep Learning can be used to distinguish cryptographic outputs from random noise using Residual Networks (ResNet) and Squeeze-and-Excitation (SE) attention mechanisms.
 
-## Project OverviewCryptanalysis is the study of analyzing information systems to study the hidden aspects of the systems. This project bridges **Classical Cryptanalysis** (Differential Attacks) with **Deep Learning**.
+## Project Overview
+Cryptanalysis is the study of analyzing information systems to study the hidden aspects of the systems. This project bridges **Classical Cryptanalysis** (Differential Attacks) with **Deep Learning**.
 
 The goal is to train a neural network to distinguish between:
 
@@ -17,13 +18,15 @@ If the network achieves accuracy significantly > 50%, the cipher is considered "
 * `train.py`: The training loop, validation logic, and Cyclic Learning Rate scheduler.
 * `README.md`: Project documentation.
 
-## Methodology###1. The Cipher**Simon 32/64** is a Feistel-based lightweight cipher proposed by the NSA .
+## Methodology###
+1. The Cipher**Simon 32/64** is a Feistel-based lightweight cipher proposed by the NSA .
 
 * **Block Size:** 32 bits
 * **Key Size:** 64 bits
 * **Operations:** Bitwise XOR, AND, Circular Shifts.
 
-###2. The AttackWe utilize a **Related-Key Differential Attack**. The paper posits that differentials where the Input Difference (\Delta P) equals the Key Difference (\Delta K) are particularly effective for neural distinguishers.
+###2. The Attack
+We utilize a **Related-Key Differential Attack**. The paper posits that differentials where the Input Difference (\Delta P) equals the Key Difference (\Delta K) are particularly effective for neural distinguishers.
 
 * 
 **Primary Differential:** `0x0000 0x0040` (Used for Single-Diff experiments).
@@ -34,7 +37,8 @@ If the network achieves accuracy significantly > 50%, the cipher is considered "
 
 
 
-###3. The ModelThe discriminator is a **Residual Network (ResNet)** enhanced with **Squeeze-and-Excitation (SE)** attention blocks.
+###3. The Model
+The discriminator is a **Residual Network (ResNet)** enhanced with **Squeeze-and-Excitation (SE)** attention blocks.
 
 * **Input:** 64-bit binary vector (concatenated ciphertext pair).
 * **Hidden Layers:** 1D Convolutional layers with Residual connections.
@@ -43,7 +47,9 @@ If the network achieves accuracy significantly > 50%, the cipher is considered "
 
 
 
-## Installation & Usage###Prerequisites* Python 3.8+
+## Installation & Usage
+###Prerequisites
+* Python 3.8+
 * PyTorch
 * Numpy
 
@@ -68,15 +74,13 @@ python train.py
 | **7 Rounds** | Multi-Differential | **55.34%** |  Signal Dilution |
 | **8 Rounds** | Single-Differential | **50.21%** |  Secure (Limit Reached) |
 
-###Key Findings1. **Breaking 7 Rounds:** The Basic Neural Distinguisher successfully identified non-random patterns in the ciphertext up to 7 rounds with >60% accuracy.
+###Key Findings
+1. **Breaking 7 Rounds:** The Basic Neural Distinguisher successfully identified non-random patterns in the ciphertext up to 7 rounds with >60% accuracy.
 2. **Signal Dilution:** At 7 rounds, the **Multi-Differential** approach yielded lower accuracy (55%) compared to the **Single-Differential** approach (60%). This suggests that mixing a strong differential (`0x40`) with a weaker one (`0x8010`) at this specific round count diluted the training signal, rather than enhancing it.
 
-##📜 References1. **Yuan, X. & Wang, Q.** (2025). *A Multi-Differential Approach to Enhance Related-Key Neural Distinguishers*. The Computer Journal.
-
-
+## References
+1. **Yuan, X. & Wang, Q.** (2025). *A Multi-Differential Approach to Enhance Related-Key Neural Distinguishers*. The Computer Journal.
 2. **Lu, J., et al.** (2024). *Improved (related-key) differential-based neural distinguishers for SIMON and SIMECK block ciphers*. The Computer Journal.
-
-
 3. **Gohr, A.** (2019). *Improving attacks on round-reduced speck32/64 using deep learning*. CRYPTO 2019.
 
 ---
