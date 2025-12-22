@@ -86,4 +86,4 @@ Key Findings
 
 ---
 
-*This project was developed as part of CGE198-Cryptographic Standards and Cryptanalysis at Chennai Mathematical Institute*
+*This project was developed as part of CGE198-Cryptographic Standards and Cryptanalysis undertaken by Gautham Sekar Sir at Chennai Mathematical Institute*
